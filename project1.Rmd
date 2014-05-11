@@ -1,0 +1,17 @@
+Exploratory Data Analysis - Course Project 1
+========================================================
+
+Load the dataset. Use ";" as the separator, make sure the header is taken into account and read ?'s as missings.
+
+```{r}
+setwd("/Users/tijlkindt/Documents/GitHub/Data Science Specialization/4) Exploratory Data Analysis/Project 1")
+powercons <- read.table("household_power_consumption.txt", sep=";", header=TRUE, na.strings="?")
+powercons$DateTime <- strptime(paste(powercons$Date,powercons$Time,sep=" "),format="%d/%m/%Y %H:%M:%S")
+```
+
+Subset the data so we only use February 1st and 2nd of 2007.
+
+```{r}
+library(xts)
+```
+

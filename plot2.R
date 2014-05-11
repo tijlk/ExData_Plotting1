@@ -10,10 +10,15 @@ powercons$DateTime <- strptime(paste(powercons$Date,powercons$Time,sep=" "),form
 # Subset the data so we only have data from February 1st and 2nd in 2007
 powerconssub <- subset(powercons, DateTime >= as.POSIXlt("2007-02-01") & DateTime < as.POSIXlt("2007-02-03") )
 
-# Plot a histogram
-with(powerconssub, plot(DateTime,Global_active_power, xlab="",type="l",
+# Open a png-file for writing
+png(file="plot2.png",width=480,height=480)
+
+# Plot a line diagram
+with(powerconssub, plot(DateTime,
+                        Global_active_power,
+                        xlab="",
+                        type="l",
                         ylab="Global Active Power (kilowatts)"))
 
-# Copy to png
-dev.copy(png,"plot2.png",width=480,height=480)
+# Close the file
 dev.off()

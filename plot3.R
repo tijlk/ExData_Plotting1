@@ -11,13 +11,17 @@ powercons$DateTime <- strptime(paste(powercons$Date,powercons$Time,sep=" "),form
 powerconssub <- subset(powercons, DateTime >= as.POSIXlt("2007-02-01") & DateTime < as.POSIXlt("2007-02-03") )
 
 # Open a png-file for writing
-png(file="plot1.png",width=480,height=480)
+png(file="plot3.png",width=480,height=480)
 
-# Plot a histogram
-hist(powerconssub$Global_active_power, 
-     col="red",
-     xlab="Global Active Power (kilowatts)",
-     main="Global Active Power")
+# Plot the 3 lines
+with(powerconssub, plot(DateTime,Sub_metering_1, xlab="",type="l",
+                        ylab="Energy sub metering"))
+with(powerconssub, lines(DateTime,Sub_metering_2, col="red"))
+with(powerconssub, lines(DateTime,Sub_metering_3, col="blue"))
+legend("topright",
+       c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),
+       col=c("black","red","blue"),
+       lty=c(1,1,1))
 
 # Close the file
 dev.off()
